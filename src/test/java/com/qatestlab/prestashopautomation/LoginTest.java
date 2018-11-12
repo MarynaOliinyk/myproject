@@ -1,17 +1,19 @@
 package com.qatestlab.prestashopautomation;
 
+import com.qatestlab.prestashopautomation.utils.WebDriverBase;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-public class LoginTest {
-    public static void main(String[] args) throws InterruptedException {
-        String url = "http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/";
+public class LoginTest extends WebDriverBase {
+    EventFiringWebDriver driver;
 
-        WebDriver driver = getDriver();
-        driver.get(url);
-
+    @Test
+    public void loginTest() throws InterruptedException {
+        driver = getEventFiringWebDriver();
 
         WebElement email = driver.findElement(By.id("email"));
         email.sendKeys("webinar.test@gmail.com");
@@ -28,13 +30,7 @@ public class LoginTest {
 
         WebElement logOutButton = driver.findElement(By.id("header_logout"));
         logOutButton.click();
-        driver.quit();
 
     }
 
-    public static WebDriver getDriver() {
-
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
-        return new ChromeDriver();
-    }
 }
